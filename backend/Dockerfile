@@ -1,19 +1,12 @@
-FROM node:18
+FROM node:18-slim
 
-# Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
+RUN npm install --production
 
-RUN npm install
-
-# Bundle app source
 COPY . .
 
-# Expose the port your app runs on
 EXPOSE 5000
 
-# Command to run your app
-CMD [ "node", "server.js" ]
+CMD ["node", "server.js"]
